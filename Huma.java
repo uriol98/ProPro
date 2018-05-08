@@ -39,6 +39,11 @@ public class Huma extends Personatge{
         public void moviment(Posicio pos2){
         //post:acosta l'huma a la pos2 una casella
         }
+	
+	
+	public void decisio(){
+	//pre:
+	//post: l'huma ha pres una decisio
         
         
 	
