@@ -15,7 +15,7 @@ public class Cela {
    // private Vector<claus> keys;
    // private Vector<Tresor> tres;
     private boolean ocupada;
-    private ArrayList<Paret> costats; //pos 0=NORD, pos 1=SUD, pos2=EST, pos3=OEST
+    private Paret[] costats; //pos 0=NORD, pos 1=SUD, pos2=EST, pos3=OEST
     private Porta port;
     
     
@@ -26,6 +26,8 @@ public class Cela {
     public Cela(){
         ocupada=false;
         numSal=-1;
+        Paret [] p = new Paret[4];
+        costats=p;
         //keys= new Vector<>();
         //tres= new Vector<>();
     }
@@ -107,30 +109,41 @@ public class Cela {
     
     public void afegirParet(Paret p, char dir){
     
-        if (dir=='N'){}
+        if (dir=='N'){
+            //costats.add(0, p);
+            costats[0]=p;
+        }
         else if (dir=='S'){
-            costats.add(1, p);
+            //costats.add(1, p);
+            costats[1]=p;
         }
         else if (dir=='E'){
-            costats.add(2, p);
+            //costats.add(2, p);
+            costats[2]=p;
         }
         else if (dir=='O'){
-            costats.add(3, p);
+            //costats.add(3, p);
+            costats[3]=p;
         }
     }
     public Paret paret(char dir){
     
+        
         if (dir=='N'){
-            return costats.get(0);
+            return costats[0];
+        // return costats.get(0);
         }
         else if(dir=='S'){
-            return costats.get(1);
+            //return costats.get(1);
+            return costats[1];
         }
         else if(dir=='E'){
-            return costats.get(2);
+            //return costats.get(2);
+            return costats[2];
         }
         else {
-            return costats.get(3);
+            //return costats.get(3);
+            return costats[3];
         }
     }
     
