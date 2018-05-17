@@ -61,10 +61,15 @@ public class Posicio {
     * @pre : --;
     * @Post: Retorna la distancia entre dues posicions
     */
-    public float Distancia (Posicio n){
-        
-        return (float) sqrt((x-n.x)*(x-n.x)+(y-n.y)*(y-n.y));
+    public float DistanciaManhattan (Posicio n){
+        int i= x-n.x;
+        if(i<0) x=x*-1;
+        int j= y-n.y;
+        if (j<0) j=j *-1;
+        return i+j;
     }
 }
+
+    
 
     
