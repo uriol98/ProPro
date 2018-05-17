@@ -34,13 +34,21 @@ public class Paret {
         return cel.size();
     }
 
-        public Cela get(int pos){
+    public Cela agafarCela(int pos){
             
             return cel.get(pos);
         }
+    
+    public void mostrar(){
+        for(int i=0; i<cel.size();i++){
+            System.out.println(cel.get(i).posicio().CoordenadaX()+" "+cel.get(i).posicio().CoordenadaY());
+        }
+    }
 }
 
 
 
+
+    
 
     
