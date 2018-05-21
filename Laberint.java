@@ -8,61 +8,57 @@ import java.util.Scanner;
 
 
 /**
- *
- * @author oriol
+    @class Laberint
+    @brief 
+    @author Oriol Canet
  */
 public class Laberint {
     private Cela[][] lab;
-    private int amplada; // amplada j
-    private int llargada; // altura i
+    private int amplada; // amplada i
+    private int llargada; // altura j
     private int nSales;
     private int minimSub;
     private ArrayList<Porta> portes;
     private ArrayList<Paret> paretsVerticals;
     private ArrayList<Paret> paretsHoritzontals;
+    private ArrayList<Sala> sales;
     
      /**
-    * @pre 
-    * @post
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public Laberint(){
         amplada = 0;
         llargada = 0;
-        nSales=0;
+        nSales=1;
         minimSub=0;
         
     }
     
     
    //GENERACIO ALEATORIA LABERINT
-        
-    public void generarLaberint2(int ampl, int llarg){
+      
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+    public void generarLaberint(int ampl, int llarg, int minimSub){
     
-        minimSub=3;
+        this.minimSub=minimSub;
         amplada = ampl;
         llargada = llarg;
         lab =ferLaberint();
         iGenerarLaberint(1,amplada,1,llargada,'H');
         
-        for (int i = 1; i<=amplada;i++){
-            String fila= new String();
-            for(int j = 1; j<=llargada;j++){
-                fila = fila + lab[i][j].numeroSala()+" ";
-            }
-            System.out.println(fila);
-        }
-        numerarSales();
-        System.out.println("despres de numeracio");
-        for (int i = 1; i<=amplada;i++){
-            String fila= new String();
-            for(int j = 1; j<=llargada;j++){
-                fila = fila + lab[i][j].numeroSala()+" ";
-            }
-            System.out.println(fila);
-        }
-        
     }
     
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     private Cela[][] ferLaberint(){
     
         int numSala=0;
@@ -72,6 +68,7 @@ public class Laberint {
         paretsHoritzontals=paretsH;
         ArrayList<Porta> port= new ArrayList<>();
         portes=port;
+        sales = new ArrayList<>();
         
         Cela[][] nouLab = new Cela[amplada+1][llargada+1];
         for (int i = 0; i<=amplada;i++){
@@ -79,7 +76,7 @@ public class Laberint {
                 nouLab[i][j] = new Cela();
                 Posicio p = new Posicio(i,j);
                 nouLab[i][j].afegirPosicio(p);
-                nouLab[i][j].afegirSala(-1);
+                
                 
                 
             }
@@ -87,18 +84,23 @@ public class Laberint {
         return nouLab;
     }
     
+    
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     private void iGenerarLaberint(int esq, int dre, int dalt, int baix, char part){
     // es podrien afegir a les celes si es te paret, pero no sembla estrictament necessari, ja que
     // aquests algorismes son nomes de generacio del laberint
-    //genera una paret de mida 1 i despres les parets reals, pero genera be
+    // fa particions del mateix valor i aixo fa que es generi una altra paret
         Random rand= new Random();
         int particio;
-        
-        if(dre-esq>=minimSub){
+        /*if(dre-esq>=minimSub){
             if(baix-dalt>=minimSub){
                 Paret p= new Paret();
-                if(part == 'H'){ //ara farem parets verticals
-                    particio = rand.nextInt((dre - esq) + 1) + esq;
+                if(part == 'V'){ //ara farem parets verticals
+                    particio = rand.nextInt((dre - esq+1)) + esq;
                     for(int i=dalt;i<=baix;i++){
                         p.AfegirCela(lab[i][particio]);
                         //System.out.println(lab[particio][i].posicio().CoordenadaX()+" "+lab[particio][i].posicio().CoordenadaY());
@@ -107,41 +109,68 @@ public class Laberint {
                     generarPorta(p,'V');
                     paretsVerticals.add(p);
                     nSales++;
-                    iGenerarLaberint(esq,particio,dalt,baix,'V');
-                    iGenerarLaberint(particio+1,dre,dalt,baix,'V');
+                    iGenerarLaberint(esq,particio,dalt,baix,'H');
+                    iGenerarLaberint(particio+1,dre,dalt,baix,'H');
                 }
                 else { //ara farem parets horitzontals
-                    particio = rand.nextInt((baix - dalt) + 1) + dalt;
+                    particio = rand.nextInt((baix - dalt+1)) + dalt;
                     for(int i=esq;i<=dre;i++){
                         p.AfegirCela(lab[particio][i]);
                     }
                     generarPorta(p,'H');
                     paretsHoritzontals.add(p);
                     nSales++;
-                    iGenerarLaberint(esq,dre,dalt,particio,'H');
-                    iGenerarLaberint(esq,dre,particio+1,baix,'H');
+                    iGenerarLaberint(esq,dre,dalt,particio,'V');
+                    iGenerarLaberint(esq,dre,particio+1,baix,'V');
                 }
                 
             }
-            else{
-                for(int i =dalt; i<=baix;i++){
-                    for(int j = esq; j<=dre;j++){
-                        lab[i][j].afegirSala(nSales);
-                    }
-                }
-            
-            }
+
         }
-    
-        else{
-            for(int i =dalt; i<=baix;i++){
-                for(int j = esq; j<=dre;j++){
-                    lab[i][j].afegirSala(nSales);
-                }
-            }
+        */
+        boolean esPotH=false;
+        boolean esPotV=false;
+        if (dre-esq>=minimSub) esPotV=true;
+        if (baix-dalt>=minimSub) esPotH=true;
         
+        if (esPotH!=esPotV){
+            if(esPotV==true)part='V';
+            else if (esPotH==true) part='H';
         }
-    
+        else {
+            if (esPotH==false) part='N';
+        }
+        System.out.println("V "+esPotV+ " H "+esPotH);
+        if(part=='V'){
+            Paret p = new Paret();
+            System.out.println("dre "+dre+" esq "+esq+ " dalt "+dalt+ " baix "+baix+" particio "+part);
+            particio=rand.nextInt((dre-esq)-1)+esq+1;
+            for(int i=dalt;i<=baix;i++){
+                p.AfegirCela(lab[i][particio]);
+            }
+            
+            p.mostrar();
+            generarPorta(p,'V');
+            paretsVerticals.add(p);
+            nSales++;
+            iGenerarLaberint(esq,particio,dalt,baix,'H');
+            iGenerarLaberint(particio+1,dre,dalt,baix,'H');
+        }
+        else if (part=='H'){
+            Paret p = new Paret();
+            System.out.println("dre "+dre+" esq "+esq+ " dalt "+dalt+ " baix "+baix+" particio "+part);
+            particio=rand.nextInt((baix-dalt)-1)+dalt+1;
+            for(int i=esq;i<=dre;i++){
+                p.AfegirCela(lab[particio][i]);
+            }
+            p.mostrar();
+            generarPorta(p,'H');
+            paretsHoritzontals.add(p);
+            nSales++;
+            iGenerarLaberint(esq,dre,dalt,particio,'V');
+            iGenerarLaberint(esq,dre,particio+1,baix,'V');
+        }
+
     }
     
     
@@ -149,18 +178,26 @@ public class Laberint {
     
     
     /**
-*
-* @pre paret no buida
-* @post
-*/
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     private void generarPorta( Paret par, char dir){
         
         Random rand = new Random();
+        if (par.mida()==0){ 
+            System.out.println("aqui tarat");
+        }
         int probabilitat = rand.nextInt(100);
         if(probabilitat>40){
-            int min=0;
             int max=par.mida()-1;
-            int pos = rand.nextInt(max+1);
+            int pos;
+            if(max==0){ 
+                pos =0;
+            }
+            else{ 
+                pos = rand.nextInt(max);
+            }
             Cela c = par.agafarCela(pos);
             Porta p = new Porta(c,dir);
             par.afegirPorta(p);
@@ -169,34 +206,12 @@ public class Laberint {
     }
     
     
-    /**
-*
-* @pre
-* @post
-*/
-    private void numerarSales(){
-        ArrayList<Integer> Sales = new ArrayList<Integer>(nSales);
-        
-        for (int i = 1;i<=amplada;i++){
-            for(int j=1;j<=llargada;j++){
-                int pos = Sales.indexOf(lab[i][j].numeroSala());
-                if(pos==-1){
-                    Sales.add(lab[i][j].numeroSala());
-                    lab[i][j].afegirSala(Sales.size());
-                }
-                else{
-                    lab[i][j].afegirSala(pos+1);
-                }
-            }
-        }
-    }
-    
     
     /**
-*
-* @pre
-* @post
-*/
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
   public  void generarFitxer(String nomFitxer) throws FileNotFoundException, UnsupportedEncodingException{
     
     
@@ -242,15 +257,55 @@ public class Laberint {
     }
     writer.println("#");
     writer.println("porta_entrada");
+    String portaEntrada = generarPortaEntrada();
+    writer.println(portaEntrada);
+    writer.println("#");
     writer.close();
 
         
     }
+  
+  
+  /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+  private String generarPortaEntrada(){
+      String s="(";
+      Random rand = new Random();
+      int paret = rand.nextInt(4)+1; //1 =paret Nord, 2=paret Sud, 3=paret Est, 4=paret Oest
+      int altura;
+      System.out.println(paret);
+      if(paret==1){
+          altura= rand.nextInt(llargada)+1;
+          s= s+"1,"+altura+") N";
+      }
+      else if (paret==2){
+          altura = rand.nextInt(llargada)+1;
+          s= s+amplada+","+altura+") S";
+      }
+      else if (paret==3){
+          altura = rand.nextInt(amplada)+1;
+          s= s+altura+",10) E";
+      }
+      else{
+          altura = rand.nextInt(amplada)+1;
+          s=s+altura+","+1+") W";
+      }
+      return s;
+      
+  }
     
  //MÈTODES DE LECTURA DE LABERINT
   
-  void llegirLaberitint(String nomFitxer) throws FileNotFoundException{
-  // falla al afegir les parets del voltant. queda en bucle infinit
+  
+  /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+  public void llegirLaberitint(String nomFitxer) throws FileNotFoundException{
     Scanner cin = new Scanner(new File (nomFitxer));
     cin.next();
     llargada= cin.nextInt();
@@ -290,7 +345,7 @@ public class Laberint {
      for (int i = 1; i<=amplada;i++){
             String fil= new String();
             for(int j = 1; j<=llargada;j++){
-                fil = fil + lab[i][j].numeroSala()+" ";
+                fil = fil + lab[i][j].sala().numeroSala()+" ";
             }
             System.out.println(fil);
         }
@@ -318,17 +373,20 @@ public class Laberint {
     if (pos1>=10) indexSub++;
     pos2= extreureNum(port.substring(indexSub));
     String dir = cin.next();
-    System.out.println("he arribat aqui");
     afegirPorta(pos1, pos2, dir);
     
-    System.out.println("He numerat");
    
-    //
+    
       
   }
   
-  public void afegirParet(int posIni, int ini, int fi, char dir, String orientacio){
-  //falla al afegir les parets dels voltants
+  
+  /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+  private void afegirParet(int posIni, int ini, int fi, char dir, String orientacio){
   
     Paret p= new Paret();
     int i=ini;
@@ -360,14 +418,14 @@ public class Laberint {
             if(orientacio.equals("E")){
                 lab[i][posIni].afegirParet(p, 'E');
                 if(posIni<llargada){
-                    lab[i][posIni+1].afegirParet(p, 'O');
+                    lab[i][posIni+1].afegirParet(p, 'W');
                 }
                 i++;
                 
             }
             else{
             
-                lab[i][posIni].afegirParet(p, 'O');
+                lab[i][posIni].afegirParet(p, 'W');
                 if(posIni>1){
                 lab[i][posIni-1].afegirParet(p, 'E');}
                 i++;
@@ -380,18 +438,29 @@ public class Laberint {
     System.out.println("fi paret");
   }
   
-    private void afegirPorta(int x, int y, String dir){
-        //falla perque no afegeix be les parets del voltant i algunes parets normals
+  
+  /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+    private void afegirPorta(int x, int y, String dir) throws NumberFormatException{
         System.out.println("x "+x+ " y "+y+ " dir "+dir);
         Porta p = new Porta(lab[x][y],dir.charAt(0));
-        if (lab[x][y].paret(dir.charAt(0))==null)System.out.println("no hi ha paret");
+        if (lab[x][y].paret(dir.charAt(0))==null) throw new NumberFormatException("1");
         else lab[x][y].paret(dir.charAt(0)).afegirPorta(p);
         lab[x][y].afegirPorta(p);
         portes.add(p);
         System.out.println("fet");
     }
     
-    private int extreureNum(String s){ //FUNCIONA SEGUR
+    
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+    private int extreureNum(String s){ 
     
         int i =0;
         int numero=-1;
@@ -417,21 +486,19 @@ public class Laberint {
     }
     
     
-    /*
-        fer metode semblant al vell de generar portes
-        dos for's. mires si la sala es diferent de 0.
-        si es 0 vol dir que es sala nova i fas escombrada de tota la sala
-        un cop acabat de fer la sala, la i incrementa. crear auxiliars per no perdre les
-        caselles
-    
-    */
-    
-    private void numerarSales2(){ //falla
+   /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+    private void numerarSales2(){
      System.out.println("Estic numerant");
+     
         for(int i = 1;i<=amplada;i++){
             for(int j=1;j<=llargada;j++){
-                if (lab[i][j].numeroSala()==-1){
+                if (lab[i][j].sala()==null){
                     int auxj=j;
+                    Sala s = new Sala(nSales);
                     while(lab[i][auxj].paret('E')==null){
                         auxj++;
                     }
@@ -442,13 +509,63 @@ public class Laberint {
                     nSales++;
                     for(int m=i;m<=auxi;m++){
                         for(int n=j;n<=auxj;n++){
-                            lab[m][n].afegirSala(nSales);
+                            lab[m][n].afegirSala(s);
+                            s.afegirCela(lab[m][n]);
                         }
                     }
                 }
                                   
             }
         }
+    }
+    
+    
+    
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+    public void mostrar(){
+        String fila="";
+        for (int i = 1; i<=llargada;i++){
+            fila = fila +"#";
+        }
+         System.out.println(fila);
+        for(int i=1;i<=amplada;i++){
+            fila="#";
+            for(int j=1;j<=llargada;j++){ // mirar parets verticals
+                if(lab[i][j].paret('E')==null) fila=fila+" ";
+                else{ 
+                    Porta p= lab[i][j].tePorta();
+                    if(p!=null){
+                        if (p.Estat()=='T') fila=fila+"|";
+                        else fila=fila+" ";
+                     }
+                    else fila = fila+"#";
+                }
+            }
+            fila=fila+"#";
+            System.out.println(fila);
+            for (int j=1;j<=llargada;j++){
+                if(lab[i][j].paret('S')==null) fila=fila+" ";
+                else{ 
+                        Porta p= lab[i][j].tePorta();
+                        if(p!=null){
+                            if (p.Estat()=='T') fila=fila+"_";
+                            else fila=fila+" ";
+                     }
+                    else fila = fila+"#";
+                }
+            }
+            fila=fila+"#";
+            System.out.println(fila);
+            
+        }
+        for (int i = 1; i<=llargada;i++){
+            fila = fila +"#";
+        }
+         System.out.println(fila);
     }
     
 }
