@@ -1,3 +1,6 @@
+
+import java.util.ArrayList;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,33 +8,55 @@
  */
 
 /**
- *
- * @author oriol
+    @class Sala
+    @brief 
+    @author Oriol Canet
  */
 public class Sala {
-    int numSala;
-    int amplada;
-    int llargada;
-    private boolean tresor;
-    private Cela[][] cambra;
+    int numSala; ///< identificador de sala
+    int amplada; ///< amplada de la sala
+    int llargada; ///< llargada de la sala
+    private boolean tresor; ///< indicador de tresor
+    private ArrayList<Cela>  cambra; ///< contenidor amb les celes de la sala
+    //private Personatges PersonatgesSala[]; ///< Contenidor amb els personatges de la sala
     
     /**
-     * 
-     * @param ampl
-     * @param llarg
-     * @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Crea una Sala buida
+     @pre  cert
+     @post S'ha creat una sala buida amb l'identificador nSala
      */
-    public Sala(int ampl, int llarg){
-    
-        amplada = ampl;
-        llargada= llarg;
-        Cela[][] c = new Cela[ampl][llarg];
-        for (int i = 0; i<ampl;i++){
-            for (int j = 0; j<llarg;j++){
-                Posicio p = new Posicio(i,j);
-                c[i][j].afegirPosicio(p);
-            }
-        }
-        cambra = c;
+    Sala(int nSala){
+        numSala= nSala;
+        cambra = new ArrayList();
     }
+    
+    /**
+     @brief Diu si és la sala del tresor
+     @pre cert
+     @post Retorna cert si és la sala del tresor
+     */
+    public boolean teTresor(){
+        return tresor;
+    }
+
+    /**
+     @brief Afegeix una cela al laberint
+     @pre cert
+     @post S'ha afegit \p c a la sala
+     */
+    public void afegirCela(Cela c){
+        cambra.add(c);
+    }
+    
+    /**
+     @brief Diu quina sala és
+     @pre cert 
+     @post Retorna l'identificador de Sala
+     */
+    public int numeroSala(){
+        return numSala;
+    }
+
 }
+
+
