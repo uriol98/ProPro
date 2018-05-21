@@ -1,17 +1,16 @@
 import java.util.ArrayList;
 
 /**
- * 
- * @author oriol
- * 
- * Descripcio General: Cela d'una sala, on hi poden haver objectes i personatges
+    @class Cela
+    @brief 
+    @author Oriol Canet
  */
 //**********    FALTEN METODES AFEGIR CLAUS I TRESOR; I RETORNAR-LOS I CONSTRUCTOR PER DEFECTE
 
 public class Cela {
  
     private Posicio pos;
-    private int numSal;
+    private Sala cambra;
    // private Vector<claus> keys;
    // private Vector<Tresor> tres;
     private boolean ocupada;
@@ -20,12 +19,13 @@ public class Cela {
     
     
     /**
-    * @pre 
-    * @post
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public Cela(){
         ocupada=false;
-        numSal=-1;
+        cambra=null;
         Paret [] p = new Paret[4];
         costats=p;
         //keys= new Vector<>();
@@ -33,18 +33,19 @@ public class Cela {
     }
     
     /**
-    * @pre --;
-    * @post Retorna les coordenades de la cela
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public Posicio posicio(){
         return pos;
     }
     
     /**
-     * @return 
-    * @pre --;
-    * @post Retorna cert si la cel·la té una o més claus
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     /*
     public boolean teClaus(){
     
@@ -53,10 +54,10 @@ public class Cela {
     */
     
     /**
-     * @return 
-    * @pre --;
-    * @post Retorna cert si la cela te el tresor
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public boolean teTresor(){
     
             //return !tres.isEmpty();
@@ -64,49 +65,58 @@ public class Cela {
     }
     
     /**
-     * @param cel
-     * @return 
-    * @pre --;
-    * @post L'humà és creat
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public boolean mateixaSala(Cela cel){
     
-        return numSal == cel.numSal;
+        return cambra.numeroSala() == cel.cambra.numeroSala();
     }
     
-    /*
-    * @Pre --;
-    * @Post retorna cert si la cela està ocupada per un personatge
-    */
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public boolean esOcupada(){
     
         return ocupada;
     }
 
-    /*
-    * @Pre 
-    * @Post
-    */
-    public void afegirSala(int sal){
-        numSal = sal;
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+    public void afegirSala(Sala sal){
+        cambra = sal;
     }
     
     /**
-    * @pre 
-    * @post
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public void afegirPosicio(Posicio p){
         pos=p;
     }
  
      /**
-    * @pre 
-    * @post
-    */
-    public int numeroSala(){
-        return numSal;
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
+    public Sala sala(){
+        return cambra;
     }
     
+    
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public void afegirParet(Paret p, char dir){
     
         if (dir=='N'){
@@ -121,11 +131,18 @@ public class Cela {
             //costats.add(2, p);
             costats[2]=p;
         }
-        else if (dir=='O'){
+        else if (dir=='W'){
             //costats.add(3, p);
             costats[3]=p;
         }
     }
+    
+    
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public Paret paret(char dir){
     
         
@@ -147,20 +164,36 @@ public class Cela {
         }
     }
     
-    
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public void afegirPorta(Porta p){
         
         port=p;
     }
     
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public Porta tePorta(){
     
         return port;
     }
     
+    
+    /**
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public void canviarOcupar(){
         if(ocupada==false) ocupada=true;
         else ocupada=false;
     }
 }
+
 
