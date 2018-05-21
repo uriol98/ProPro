@@ -8,47 +8,48 @@ import static java.lang.Math.sqrt;
  */
 
 /**
- * Date creation: 29/3/2018
- * @author oriol
+    @class Posicio
+    @brief 
+    @author Oriol Canet
  */
-
-/**
-    Descripcio General: Coordenades cartesianes en dos dimensions 
-*/
 public class Posicio {
     private int x;
     private int y;
     
     /**
-    * @pre : --;
-    * @post : la coordenada x val x i la coordenada y val y
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public Posicio (int x, int y){
     this.x = x;
     this.y = y;
     }
     
     /**
-    * @pre --;
-    * @post retorna la coordenada x
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public int CoordenadaX(){
         return x;
     }
     
     /**
-    * @pre --;
-    * @post retorna la coordenada y
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public int CoordenadaY () {
     
         return y;
     }
     
     /**
-    * @pre : --;
-    * @Post: Retorna el vector que hi ha entre dues posicions
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public Posicio Vector(Posicio n){
         int distanciaX = n.x-x;
         int distanciaY = n.y-y;
@@ -58,9 +59,10 @@ public class Posicio {
     
     
     /**
-    * @pre : --;
-    * @Post: Retorna la distancia entre dues posicions
-    */
+     @brief
+     @pre 
+     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     */
     public float DistanciaManhattan (Posicio n){
         int i= x-n.x;
         if(i<0) x=x*-1;
