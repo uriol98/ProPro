@@ -1,10 +1,5 @@
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
     @class Paret
@@ -12,79 +7,61 @@ import java.util.ArrayList;
     @author Oriol Canet
  */
 public class Paret {
-    private ArrayList<Cela> cel;
-    private Porta por;
+    private ArrayList<Cela> celes;
+    private ArrayList<Porta> port;
     
    /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Crea una paret buida
+     @pre cert
+     @post La paret està buida
      */
     public Paret(){
     
         ArrayList<Cela> p = new ArrayList();
-        cel=p;
+        port=new ArrayList();
+        celes=p;
     }
     
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Afegeix una cela
+     @pre cert
+     @post S'ha afegit la cela \p c a la paret
      */
     public void AfegirCela(Cela c){
-        cel.add(c);
+        celes.add(c);
     }
     
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief afegeix una porta
+     @pre cert
+     @post S'ha afegit la porta \p p a la paret
      */
     public void afegirPorta(Porta p){
-        por=p;
+        port.add(p);
     }
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief diu la mida de la paret
+     @pre cert
+     @post Retorna la mida de la paret
      */
     public int mida(){
-        return cel.size();
+        return celes.size();
     }
 
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief retorna una cela
+     @pre 0<=pos<=mida
+     @post Retorna la cela que hi ha a la posicio pos 
      */
     public Cela agafarCela(int pos){
             
-            return cel.get(pos);
+            return celes.get(pos);
         }
     
-    /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
-     */
-    public void mostrar(){
-        for(int i=0; i<cel.size();i++){
-            System.out.println(cel.get(i).posicio().CoordenadaX()+" "+cel.get(i).posicio().CoordenadaY());
-        }
-    }
-    
-    /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
-     */
-    public Porta getPorta(){
-        return por;
-    }
     
 }
 
