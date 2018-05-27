@@ -74,7 +74,8 @@ public void llegirJoc (String nomFitxer){
 }
 
 private int extreureNum(String s){ 
-    
+//Pre:
+//Post:
         int i =0;
         int numero=-1;
         boolean trobat=false;
