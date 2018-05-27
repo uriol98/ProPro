@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 /**
     @class Porta
@@ -15,6 +11,7 @@ public class Porta {
     private char orientacio; ///< orientacio de la porta
     private char estat; ///< estat en que es troba la porta
     private Paret par; ///< paret on es situa la porta
+    private Sala [] sales;
 
     /**
      @brief Crea una porta tancada
@@ -24,7 +21,8 @@ public class Porta {
     public Porta(){
         numPorta=0;
         orientacio='N';
-        estat='T';
+        estat='T'; 
+        sales= new Sala[2];
     }
     
     
@@ -39,6 +37,7 @@ public class Porta {
         cel=c;
         orientacio=o;
         estat='T';
+        sales= new Sala[2];
     }
     
     /**
@@ -84,11 +83,18 @@ public class Porta {
    
    /**
      @brief Afegeix un identificador
-     @pre \p id > 0
-     @post S'afegeix l'identificador \p i a la porta
+     @pre La porta té les dues sales afegides
+     @post La sala queda numerada seguint l'expressio 1000j+k on j i k són id's de cambres
      */
-   public void afegirID(int i){
-       numPorta=i;
+   public void numerarPorta(){
+       int id1=sales[0].numeroSala();
+       int id2=sales[1].numeroSala();
+       if (id1<id2){
+           numPorta=1000*id1+id2;
+       }
+       else{
+           numPorta=1000*id2+id1;
+       }
    }
    
    /**
@@ -130,5 +136,38 @@ public class Porta {
    public char Estat(){
        return estat;
    }
+   
+   /**
+     @brief Diu l'estat en que es troba la porta
+     @pre cert
+     @post Retorna l'estat de la porta
+     */
+   public void afegirSales(Sala s1, Sala s2){
+       sales[0]=s1;
+       sales[1]=s2;
+       
+   }
+   
+   
+   /**
+     @brief Diu l'estat en que es troba la porta
+     @pre cert
+     @post Retorna l'estat de la porta
+     */
+   public Sala Cambra(char c){
+   
+       if (c=='N'){
+           return sales[0];
+       }
+       else if (c=='E'){
+           return sales[0];
+       }
+       else{
+           return sales[1];
+       }
+   }
+   
+   public void numerarPortaEntrada(){
+       numPorta=0;
+   }
 }
-
