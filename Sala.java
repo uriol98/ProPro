@@ -1,12 +1,6 @@
 
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
     @class Sala
     @brief 
@@ -14,11 +8,9 @@ import java.util.ArrayList;
  */
 public class Sala {
     int numSala; ///< identificador de sala
-    int amplada; ///< amplada de la sala
-    int llargada; ///< llargada de la sala
     private boolean tresor; ///< indicador de tresor
     private ArrayList<Cela>  cambra; ///< contenidor amb les celes de la sala
-    //private Personatges PersonatgesSala[]; ///< Contenidor amb els personatges de la sala
+    private ArrayList<Personatge> PersonatgesSala; ///< Contenidor amb els personatges de la sala
     
     /**
      @brief Crea una Sala buida
@@ -28,6 +20,7 @@ public class Sala {
     Sala(int nSala){
         numSala= nSala;
         cambra = new ArrayList();
+        PersonatgesSala= new ArrayList();
     }
     
     /**
@@ -56,7 +49,25 @@ public class Sala {
     public int numeroSala(){
         return numSala;
     }
-
+    
+    
+    /**
+     @brief Afegeix un personatge
+     @pre cert 
+     @post S'ha afegit el personatge \p p a la sala
+     */
+    public void afegirPersonatge(Personatge p){
+        PersonatgesSala.add(p);
+    }
+    
+    
+    /**
+     @brief Treu un personatge de la Sala
+     @pre cert 
+     @post El personatge \p p surt de la sala
+     */
+    public void sortirPersonatge(Personatge p){
+        PersonatgesSala.remove(p);
+    }
 }
-
 
