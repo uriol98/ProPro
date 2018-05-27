@@ -1,11 +1,5 @@
 
-import static java.lang.Math.sqrt;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
     @class Posicio
@@ -13,13 +7,13 @@ import static java.lang.Math.sqrt;
     @author Oriol Canet
  */
 public class Posicio {
-    private int x;
-    private int y;
+    private int x; ///< posicio d'una matriu
+    private int y; ///< posicio y d'una matriu
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Crea una posicio amb x i y
+     @pre  cert
+     @post S'ha creat una posicio amb x = \p x i y= \p y
      */
     public Posicio (int x, int y){
     this.x = x;
@@ -27,18 +21,18 @@ public class Posicio {
     }
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Diu quina és la coordenada x
+     @pre cert
+     @post Retorna la coordenada x de la posicio
      */
     public int CoordenadaX(){
         return x;
     }
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Diu quina és la coordenada y
+     @pre cert
+     @post Retorna la coordenada y de la posició
      */
     public int CoordenadaY () {
     
@@ -46,9 +40,9 @@ public class Posicio {
     }
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Diu quin és el vector que hi ha entre dues posicions
+     @pre cert
+     @post Retorna el vector format entre la posicio i \p n
      */
     public Posicio Vector(Posicio n){
         int distanciaX = n.x-x;
@@ -59,11 +53,11 @@ public class Posicio {
     
     
     /**
-     @brief
-     @pre 
-     @post La sala s'ha creat amb una llargada de llarg i una amplada de ampl
+     @brief Diu quina és la distancia entre dues posicions
+     @pre cert
+     @post Retorna la distància que hi ha entre la posicio i \p n
      */
-    public float DistanciaManhattan (Posicio n){
+    public int DistanciaManhattan (Posicio n){
         int i= x-n.x;
         if(i<0) x=x*-1;
         int j= y-n.y;
@@ -71,7 +65,5 @@ public class Posicio {
         return i+j;
     }
 }
-
-    
 
     
