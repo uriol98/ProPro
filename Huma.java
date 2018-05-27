@@ -57,7 +57,7 @@ public class Huma extends Personatge{
         
         
  
-        public void decisio(){
+        public void accioHuma(){
         //Pre:torn de huma no controlat per usuari
         //Post:tria quina es la millor accio 
             if(tresor == null){
